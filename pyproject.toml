@@ -1,0 +1,14 @@
+[project]
+name = "infinity-client"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.115.11",
+    "infinity-sdk==0.6.0.dev3",
+    "logger>=1.4",
+    "sqlite-utils>=3.38",
+    "starlette-session>=0.4.3",
+    "uvicorn>=0.34.0",
+]

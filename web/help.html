@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infinity Client WebUI - A.D.I 帮助中心</title>
+    <style>
+    html,body,div,p,ul,li,h1,h2,h3,h4,h5,h6{
+      margin: 0;
+      padding: 0;
+    }
+    ul,li{
+      list-style: none;
+    }
+    body{
+      background-color: #121212;
+      color: #f2f2f2;
+      font-size: 16px;
+      font-family: Arial, Helvetica, sans-serif;
+      padding: 40px;
+      line-height: 1.6;
+    }
+    h1 {
+      font-size: 2.2em;
+      margin-bottom: 1.2em;
+    }
+    h3 {
+      font-size: 1.5em;
+      margin: 2em 0 1em;
+      padding-bottom: 0.5em;
+      border-bottom: 1px solid #333;
+    }
+    p {
+      margin: 1em 0;
+    }
+    pre ,p{
+      background-color: #1e1e1e;
+      padding: 1.2em;
+      border-radius: 6px;
+      overflow-x: auto;
+      margin: 1.5em 0;
+    }
+    code, p{
+      font-family: Consolas, monospace;
+      font-size: 0.9em;
+      line-height: 1.4;
+    }
+ 
+    p > p {
+      margin: 0.5em 0;
+     
+    }
+    </style>
+  </head>
+  <body>
+    <h1>
+      A.D.I Infinity Client WebUI SQL 帮助中心
+    </h1>
+    <p>
+      这里是 A.D.I Infinity Client WebUI SQL 的官方文档，包含了 A.D.I Infinity Client WebUI SQL 的所有功能和用法。
+    </p>
+    <h3>添加数据</h3>
+    <p>
+      insert->[{"name":"A.D.I","age":18}]
+    </p>
+    <h3>删除数据</h3>
+    <p>
+      delete->name="xxx"
+    </p>
+    <p>
+      delete->_row_id=8
+    </p>
+    <h3>修改数据</h3>
+    <p>
+      update->{"cond":"_row_id=1 | age < 18","data":{"name":"ADI","age":18}}
+    </p>
+    <h3>查询数据</h3>
+      <p>select->*</p>
+      <p>select->_row_id,*</p>
+      <p>select->_row_id,name,age</p>
+      <p>select->_row_id,*->limit->5</p>
+      <p>select->_row_id,name,aa->filter->aa>17->sort->[["aa","desc"]]->offset->1->limit->1->option->{"total_hits_count": true}</p>
+      <p>select->name,aa->filter->aa>17->sort->[["aa","desc"]]->groupby->["name","aa"]->offset->0->limit->10->option->{"total_hits_count": true}</p>
+      <p>select->name,sum(aa)->groupby->["name"]->having->sum(aa)>20</p>
+
+    
+      <pre>
+        <h3 style="margin: 0;padding:0;">Dense Vector</h3>
+        <code>
+          knn_params:dict[str，str]，可选
+          表示附加KNN或ANN搜索参数的字典。
+          “ef”：str，推荐值：topn值的1到10倍。
+          例如，如果将topn设置为10，则可以将“ef”设置为“50”。
+          如果将“ef”设置得太高，搜索性能可能会恶化。
+          如果不设置“ef”或将其设置为低于topn的值，则搜索将使用topn值作为“ef”的值。
+          “threshold”：str，可选搜索阈值。
+          例如，如果使用“余弦”距离度量并将“阈值”设置为“0.5”，则搜索将仅返回余弦相似度大于0.5的行。
+          “nprobe”：str，可选用于搜索IVF索引的细胞数量。默认值为“1”。
+          “index_name”：str，可选您希望数据库对其执行查询的索引的名称。
+
+          select->*->matchdense->{
+            column: "dense_vector",
+            embdData: [1, 2, 3, 4, 5],
+            embdDataType: "float | uint8",
+            # ip: inner product, l2: euclidean distance, cosine: cosine similarity
+            instanceType: "ip | l2 | cosine", 
+            topn: 10,
+            knn_params: ["ef":"50"] #不传入
+          }
+        </code>
+      </pre>
+  </body>
+</html>
