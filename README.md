@@ -1,7 +1,9 @@
+<img src="readme_src/logo.svg" width="160px" />
+
+
 # infinity client WebUI v1.0.0
 
 #### 项目介绍
-<img src="readme_src/logo.svg" width="60px" />
 infinity client WebUI 是一个基于vue3的webUI，用于管理
 <a href="https://github.com/infiniflow/infinity" target="_blank">infinity vector db</a>
 数据库。
