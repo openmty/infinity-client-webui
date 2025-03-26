@@ -1,8 +1,7 @@
 <div align="center">
-<h1 style="display:flex;align-items:center;">
-<img src="readme_src/logo.svg" width="160px" style="margin:0 10px 0 0" />
- infinity client WebUI v1.0.0
-</h1>
+<div><img src="readme_src/logo.svg" width="160px" /></div>
+<h1  align="center">infinity client WebUI v1.0.0</h1>
+
 </div>
 
 #### 项目介绍
