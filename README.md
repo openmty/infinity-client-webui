@@ -27,10 +27,13 @@ cd infinity-client
 3.  安装依赖
 ```
 uv sync
+cd web
+npm i
+npm run build
 ```
 4.  启动项目
 ```
-uv run
+python main.py
 ```
 5.  打开浏览器访问
 ```

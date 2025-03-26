@@ -1,24 +1,19 @@
 import logging
-from fastapi import FastAPI, Request
-from fastapi.staticfiles import StaticFiles
-from fastapi.middleware.cors import CORSMiddleware
-import uvicorn
+import os
 import signal
-import sys,os
-from config import infinity_url,infinity_port
-import infinity
-import logger
-from pydantic import BaseModel, Field
-from db import sqlite_db
-from starlette_session import SessionMiddleware
-from apps.UserApi import userRouter
-from apps.InfinityConfigApi import infinityConfigRouter
+import sys
+
+import uvicorn
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+
 from apps.DBManagerApi import dbMRouter
-import db
+from apps.InfinityConfigApi import infinityConfigRouter
+from apps.UserApi import userRouter
+from db import sqlite_db
 
 app = FastAPI()
-
-
 
 # 添加跨域中间件
 app.add_middleware(
@@ -30,6 +25,7 @@ app.add_middleware(
 )
 
 from starlette_session import SessionMiddleware
+
 app.add_middleware(
     SessionMiddleware,
     secret_key="ADI-INFINITYDB-XHHFJG8e7DJD8-secret-KEY",
@@ -52,31 +48,30 @@ def shutdown_handler(signum, frame):
     logging.info("sys exit")
     sys.exit(0)
 
+
 # @app.get("/")
 # async def root():
 #     return {"message": "Infinity Client Server."}
-
 
 
 app.include_router(userRouter)
 app.include_router(infinityConfigRouter)
 app.include_router(dbMRouter)
 
+
 def main():
     # 注册信号处理
     signal.signal(signal.SIGINT, shutdown_handler)
     signal.signal(signal.SIGTERM, shutdown_handler)
 
-
     # 挂载静态文件目录
-    web = os.path.join('web','dist')
+    web = os.path.join('web', 'dist')
     # print('web------:',web)
     app.mount("/", StaticFiles(directory=web, html=True), name="web")
-    
+
     # print("Hello from infinity-client!")
     # print('infinity_object:', infinity_object)
     uvicorn.run(app, host="0.0.0.0", port=8000)
-
 
 
 if __name__ == "__main__":
