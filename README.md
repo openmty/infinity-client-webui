@@ -80,6 +80,8 @@ http://localhost:8000
 2.  新建 Feat_xxx 分支
 3.  提交代码
 4.  新建 Pull Request
-5. test
+5.  test
+6.  git config user.name "xxx"
+7.  git config user.email "xxx@xxx.com"
 
 
