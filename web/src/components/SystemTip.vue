@@ -99,6 +99,7 @@ h3::before{
 }
 .headerContainer .logoImage{
   width: 60px;
+  margin: 0 10px 0 0;
 }
 .headerContainer .theme{
   display: flex;
