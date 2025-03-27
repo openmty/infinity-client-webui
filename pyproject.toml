@@ -1,7 +1,7 @@
 [project]
 name = "infinity-client"
 version = "0.1.0"
-description = "Add your description here"
+description = "infinity client WebUI 是一个基于vue3的webUI，用于管理infinty db"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
